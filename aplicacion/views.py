@@ -54,6 +54,24 @@ def editprod(request, id):
             return redirect(to="catalogo")
         
     return render(request,'aplicacion/editprod.html', datos)
+
+def editrep(request, id):
+    reparacion=get_object_or_404(Reparacion, id=id)
+    
+    form=UpdateReparacionForm(instance=reparacion)
+    datos={
+        "form":form,
+        "reparacion":reparacion
+    }
+    
+    if request.method=="POST":
+        form=UpdateReparacionForm(data=request.POST, files=request.FILES, instance=reparacion)
+        if form.is_valid():
+            form.save()
+            messages.warning(request,'Reparacion modificada exitosamente')
+            return redirect(to="catalogorep")
+        
+    return render(request,'aplicacion/editrep.html', datos)
     
 def nuevosproductos(request):
     
@@ -89,24 +107,9 @@ def nuevosreparaciones(request):
     }
     return render(request,'aplicacion/nuevosreparaciones.html', datos)
 
-def editprod(request, id):
-    reparacion=get_object_or_404(Reparacion, id=id)
+
     
-    form=UpdateReparacionForm(instance=reparacion)
-    datos={
-        "form":form,
-        "reparacion":reparacion
-    }
-    
-    if request.method=="POST":
-        form=UpdateReparacionForm(data=request.POST, files=request.FILES, instance=reparacion)
-        if form.is_valid():
-            form.save()
-            messages.warning(request,'Reparacion Modificada Exitosamente')
-            return redirect(to="catalogorep") #Remplazar por catalogo reparaciones
-        
-    return render(request,'aplicacion/editprod.html', datos) #Remplazar por editar reparaciones
-    
+
 
 def catalogo(request):
     producto=Producto.objects.all()
@@ -124,10 +127,33 @@ def eliminarprod(request, id):
     }
     
     if request.method=="POST":
-        if productos.imagen:
-            remove(path.join(str(settings.MEDIA_ROOT).replace('/media','')+productos.imagen.url))
-        productos.delete()
+        if producto.imagen:
+            remove(path.join(str(settings.MEDIA_ROOT).replace('/media','')+producto.imagen.url))
+        producto.delete()
         messages.error(request, 'Producto eliminado exitosamente')
         return redirect(to='catalogo')
     
     return render(request, 'aplicacion/eliminarprod.html',datos)
+
+
+def eliminarep(request, id):
+    reparacion=get_object_or_404(Reparacion, id=id)
+    
+    datos={
+        "reparacion":reparacion
+    }
+    
+    if request.method=="POST":
+        if reparacion.imagen:
+            remove(path.join(str(settings.MEDIA_ROOT).replace('/media','')+reparacion.imagen.url))
+        reparacion.delete()
+        messages.error(request, 'Reparación eliminada exitosamente')
+        return redirect(to='catalogorep')
+    
+    return render(request, 'aplicacion/eliminarep.html',datos)
+
+def completar(request,id):
+    reparacion = get_object_or_404(Reparacion,id=id)
+    reparacion.delete()
+    messages.success(request, "Eliminado exitosamente")
+    return redirect(to="editarep")

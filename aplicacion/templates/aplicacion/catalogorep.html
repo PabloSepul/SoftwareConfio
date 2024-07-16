@@ -42,6 +42,12 @@
                 <span>Catalogo</span>
             </a>
         </li>
+        <li>
+            <a href={% url "catalogorep" %}>
+                <i class="fas fa-star"></i>
+                <span>catalogo Reparaciones</span>
+            </a>
+        </li>
         </li>
             <li class="logout">
                 <a href={% url "index" %}>
@@ -77,6 +83,7 @@
                                 <th>Precio</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
+                                <th>Completar</th>
                             </tr>
 
                     <tbody>
@@ -87,6 +94,10 @@
                             <td>{{rep.nombre}}</td>
                             <td>{{rep.descripcion}}</td>
                             <td>{{rep.costo}}</td>
+                            <td><a class="" href="{% url "editrep" rep.id %}" role="button" >Editar</a></td>
+                            <td><a class="" href="{% url "eliminarep" rep.id %}" role="button" >Eliminar</a></td>
+                            <td><a href="#" onclick="completar({{ rep.id }})"> Completar</a></td>
+
                             <td></td>
                             <td></td>
                         </tr>
