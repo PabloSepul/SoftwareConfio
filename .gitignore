@@ -1,0 +1,6 @@
+aplicacion/__pycache__/
+sitio/__pycache__/
+aplicacion/migrations/__pycache__/
+db.sqlite3
+Lib
+site-packages

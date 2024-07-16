@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="{% static '../static/css/dashboard.css' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo"></div>
+        <ul class="menu">
+            <li class="active">
+                <a href="{% url "index" %}">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href={% url "nuevosproductos" %}>
+                    <i class="fas fa-star"></i>
+                    <span>Productos</span>
+                </a>
+            </li>
+        </li>
+            <li>
+                <a href={% url "nuevosreparaciones" %}>
+                    <i class="fas fa-star"></i>
+                    <span>Nuevas Reparaciones</span>
+                </a>
+            </li>
+        </li>
+            <li>
+                <a href={% url "catalogo" %}>
+                <i class="fas fa-barcode"></i>
+                <span>Catalogo</span>
+            </a>
+        </li>
+        </li>
+            <li class="logout">
+                <a href={% url "index" %}>
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar sesion</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <h2> Dashboard</h2>
+            </div>
+            <div class="user--info">
+                <div class="searh--box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search" />
+                </div>
+            </div>
+        </div>
+        <div class="tabular--wrapper">
+            <h3 class="main--title">Catalogo</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th>
+                                <th>Nombre </th>
+                                <th>descripcion</th>
+                                <th>Precio</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </tr>
+
+                    <tbody>
+                        {% for rep in reparacion %}
+                        <tr>
+                            <td>{{rep.id}} </td>
+                            <td><img src='{{rep.imagen.url}}' alt={{rep.nombre}} height="100"></td>
+                            <td>{{rep.nombre}}</td>
+                            <td>{{rep.descripcion}}</td>
+                            <td>{{rep.costo}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+        
+    
+
+</body>
+
+</html>

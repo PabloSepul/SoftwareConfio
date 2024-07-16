@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="{% static '../static/css/dashboard.css' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo"></div>
+        <ul class="menu">
+            <li class="active">
+                <a href="{% url "index" %}">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href={% url "nuevosproductos" %}>
+                    <i class="fas fa-star"></i>
+                    <span>Productos</span>
+                </a>
+            </li>
+        </li>
+            <li>
+                <a href={% url "nuevosreparaciones" %}>
+                    <i class="fas fa-star"></i>
+                    <span>Nuevas Reparaciones</span>
+                </a>
+            </li>
+        </li>
+            <li>
+                <a href={% url "catalogo" %}>
+                <i class="fas fa-barcode"></i>
+                <span>Catalogo</span>
+            </a>
+        </li>
+        <li>
+            <a href={% url "catalogorep" %}>
+                <i class="fas fa-star"></i>
+                <span>catalogo Reparaciones</span>
+            </a>
+        </li>
+        </li>
+            <li class="logout">
+                <a href={% url "index" %}>
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar sesion</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <h2> Dashboard</h2>
+            </div>
+            <div class="user--info">
+                <div class="searh--box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search" />
+                </div>
+            </div>
+        </div>
+        <div class="card--container">
+            <h3 class="main--title">Resumen</h3>
+            <div class="card--wrapper">
+                <div class="payment--card light-red">
+                    <div class="card--header">
+                        <div class="amount">
+                            <span class="title">
+                                Monto total mes </span>
+                            <span class="amount--value">$50.000</span>
+                        </div>
+                        <i class="fas fa-dollar-sign icon"></i>
+                    </div>
+                    <span class="card-detail">**** **** **** 3543</span>
+                </div>
+                <div class="payment--card light-purple">
+                    <div class="card--header">
+                        <div class="amount">
+                            <span class="title">
+                                Monto Diario </span>
+                            <span class="amount--value">$7.000</span>
+                        </div>
+                        <i class="fas fa-list icon dark-purple"></i>
+                    </div>
+                    <span class="card-detail">**** **** **** 5542</span>
+                </div>
+                <div class="payment--card light-blue">
+                    <div class="card--header">
+                        <div class="amount">
+                            <span class="title">
+                                Pagos realizados </span>
+                            <span class="amount--value">$35.000</span>
+                        </div>
+                        <i class="fa-solid fa-check icon dark-blue"></i>
+                    </div>
+                    <span class="card-detail">**** **** **** 7745</span>
+                </div>
+                <div class ="cat">
+                    <img id="cat-image" src="" alt="Gato">
+                </div>
+            </div>
+        </div>
+        <div class="tabular--wrapper">
+            <h3 class="main--title">Compras recientes</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo de pago</th>
+                            <th>Nombre</th>
+                            <th>Monto</th>
+                            <th>Categoria</th>
+                            <th>Estado</th>
+                            <th>Accion</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                2024-04-08
+                            </td>
+                            <td>Debito</td>
+                            <td>Bicicleta Mont</td>
+                            <td>$20.000</td>
+                            <td>Rueda</td>
+                            <td>Pendiente</td>
+                            <td><a href={% url "editarcompra" %}>Editar</a></td>
+                        
+                        </tr>
+                        
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                2024-04-10
+                            </td>
+                            <td>Debito</td>
+                            <td>Bicicleta</td>
+                            <td>$156.879</td>
+                            <td>bicicleta</td>
+                            <td>Pagado</td>
+                            <td><a href={% url "editarcompra" %}>Editar</a></td>
+                        </tr>
+                        
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                2024-04-12
+                            </td>
+                            <td>Credito</td>
+                            <td>Naruto</td>
+                            <td>$5.000</td>
+                            <td>Narita</td>
+                            <td>Pagado</td>
+                            <td><a href={% url "editarcompra" %}>Editar</a></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
