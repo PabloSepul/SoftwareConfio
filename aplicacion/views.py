@@ -153,7 +153,17 @@ def eliminarep(request, id):
     return render(request, 'aplicacion/eliminarep.html',datos)
 
 def completar(request,id):
-    reparacion = get_object_or_404(Reparacion,id=id)
-    reparacion.delete()
-    messages.success(request, "Eliminado exitosamente")
-    return redirect(to="editarep")
+    reparacion=get_object_or_404(Reparacion, id=id)
+    
+    datos={
+        "reparacion":reparacion
+    }
+    
+    if request.method=="POST":
+        if reparacion.imagen:
+            remove(path.join(str(settings.MEDIA_ROOT).replace('/media','')+reparacion.imagen.url))
+        reparacion.delete()
+        messages.error(request, 'Reparación completada exitosamente')
+        return redirect(to='catalogorep')
+    
+    return render(request, 'aplicacion/completar.html',datos)
