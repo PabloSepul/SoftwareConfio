@@ -20,6 +20,9 @@ def contact(request):
 def gallery(request):
     return render(request, 'aplicacion/gallery.html')
 
+def filtro(request):
+    return render(request, 'aplicacion/filtro.html')
+
 def testimonial(request):
     return render(request, 'aplicacion/testimonial.html')
 
@@ -51,7 +54,7 @@ def editprod(request, id):
         if form.is_valid():
             form.save()
             messages.warning(request,'Producto modificado exitosamente')
-            return redirect(to="catalogo")
+            return redirect(to="productos_filtrados")
         
     return render(request,'aplicacion/editprod.html', datos)
 
@@ -83,7 +86,7 @@ def nuevosproductos(request):
             form.save()
 
             messages.success(request,'Producto agregado exitosamente')
-            return redirect(to="catalogo")
+            return redirect(to="productos_filtrados")
         
     datos={
         "form":form
@@ -131,7 +134,7 @@ def eliminarprod(request, id):
             remove(path.join(str(settings.MEDIA_ROOT).replace('/media','')+producto.imagen.url))
         producto.delete()
         messages.error(request, 'Producto eliminado exitosamente')
-        return redirect(to='catalogo')
+        return redirect(to='productos_filtrados')
     
     return render(request, 'aplicacion/eliminarprod.html',datos)
 
@@ -167,3 +170,11 @@ def completar(request,id):
         return redirect(to='catalogorep')
     
     return render(request, 'aplicacion/completar.html',datos)
+
+def productos_filtrados(request):
+    query = request.GET.get('q')
+    if query:
+        productos = Producto.objects.filter(stock=query).order_by('stock')
+    else:
+        productos = Producto.objects.order_by('stock')
+    return render(request, 'aplicacion/productos_filtrados.html', {'productos': productos, 'query': query})

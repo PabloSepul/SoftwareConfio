@@ -1,7 +1,7 @@
 from django.urls import path, include
 from sitio import settings
 from django.conf.urls.static import static
-from .views import index, about, contact, gallery, testimonial, eliminarprod, editprod, catalogo,completar, nuevosproductos, editrep, eliminarep,editarcompra, dashboard, nuevosreparaciones, catalogorep
+from .views import index,filtro,productos_filtrados, about, contact, gallery, testimonial, eliminarprod, editprod, catalogo,completar, nuevosproductos, editrep, eliminarep,editarcompra, dashboard, nuevosreparaciones, catalogorep
 
 
 urlpatterns = [
@@ -21,6 +21,8 @@ urlpatterns = [
     path('editrep/<id>', editrep, name='editrep'),
     path('eliminarep/<id>',eliminarep, name='eliminarep'),    
     path('completar/<id>/',completar,name="completar"),
+    path('filtro', filtro, name='filtro'),
+    path('productos_filtrados/', productos_filtrados, name='productos_filtrados'),
 ]
 
 if settings.DEBUG:
